@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "prod"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "resourcePrefix": {
+      "value": "atr"
+    },
+    "integrationAccountId": {
+      "value": "/subscriptions/b3d2bd45-5b6c-47f7-90a5-de1bfe91c9a9/resourceGroups/az-p-rg-b2bIntegration/providers/Microsoft.Logic/integrationAccounts/az-p-ia-b2bIntegration"
+    },
+    "stylesheetStorageConnection": {
+      "value": ""
+    },
+    "partnerConfigApiUrl": {
+      "value": ""
+    },
+    "existingKeyVaultName": {
+      "value": "az-p-kv-b2bInt-eus-01"
+    },
+    "existingManagedIdentityName": {
+      "value": "az-p-mi-ApiTranslator-eus-01"
+    },
+    "existingResourceGroupName": {
+      "value": "az-p-rg-b2bIntegration"
+    },
+    "appServicePlanName": {
+      "value": "az-p-asp-ApiTranslator-eus-03"
+    },
+    "logicAppName": {
+      "value": "az-p-lap-ApiTranslator-eus-03"
+    },
+    "appServicePlanSku": {
+      "value": "WS2"
+    },
+    "appServicePlanTier": {
+      "value": "WorkflowStandard"
+    },
+    "maxElasticWorkerCount": {
+      "value": 50
+    },
+    "targetWorkerCount": {
+      "value": 3
+    },
+    "logAnalyticsRetentionDays": {
+      "value": 90
+    },
+    "storageAccountType": {
+      "value": "Standard_GRS"
+    },
+    "storageAccountTier": {
+      "value": "Hot"
+    }
+  }
+}
