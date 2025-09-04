@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "ApiTranslator",
+      "path": "./ApiTranslator"
+    }
+  ],
+  "settings": {
+    "terminal.integrated.env.windows": {
+      "PATH": "C:\\Users\\mwsmith\\.azurelogicapps\\dependencies\\DotNetSDK;${env:PATH}"
+    },
+    "omnisharp.dotNetCliPaths": [
+      "C:\\Users\\mwsmith\\.azurelogicapps\\dependencies\\DotNetSDK"
+    ]
+  }
+}
