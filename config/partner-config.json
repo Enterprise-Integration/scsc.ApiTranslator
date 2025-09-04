@@ -1,0 +1,53 @@
+{
+  "partnerConfigurations": [
+    {
+      "tradingPartnerId": "ACME_CORP",
+      "partnerName": "ACME Corporation",
+      "documentTypes": [
+        {
+          "documentType": "PURCHASE_ORDER",
+          "stylesheetName": "acme_po_transform.xslt",
+          "stylesheetPath": "https://yourstorageaccount.blob.core.windows.net/stylesheets/acme_po_transform.xslt",
+          "isActive": true,
+          "version": "1.0",
+          "description": "Transform generic PO to ACME format"
+        },
+        {
+          "documentType": "INVOICE", 
+          "stylesheetName": "acme_invoice_transform.xslt",
+          "stylesheetPath": "https://yourstorageaccount.blob.core.windows.net/stylesheets/acme_invoice_transform.xslt",
+          "isActive": true,
+          "version": "1.0",
+          "description": "Transform generic invoice to ACME format"
+        }
+      ]
+    },
+    {
+      "tradingPartnerId": "VENDOR_XYZ",
+      "partnerName": "XYZ Vendor Solutions",
+      "documentTypes": [
+        {
+          "documentType": "PURCHASE_ORDER",
+          "stylesheetName": "xyz_po_transform.xslt", 
+          "stylesheetPath": "https://yourstorageaccount.blob.core.windows.net/stylesheets/xyz_po_transform.xslt",
+          "isActive": true,
+          "version": "2.1",
+          "description": "Transform generic PO to XYZ format with extended fields"
+        },
+        {
+          "documentType": "SHIPMENT_NOTICE",
+          "stylesheetName": "xyz_asn_transform.xslt",
+          "stylesheetPath": "https://yourstorageaccount.blob.core.windows.net/stylesheets/xyz_asn_transform.xslt", 
+          "isActive": true,
+          "version": "1.0",
+          "description": "Transform generic ASN to XYZ shipment format"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-09-04T00:00:00Z",
+    "description": "Trading partner document transformation configuration"
+  }
+}
