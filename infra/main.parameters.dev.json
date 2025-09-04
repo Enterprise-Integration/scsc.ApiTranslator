@@ -2,23 +2,11 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "environmentName": {
-      "value": "dev"
-    },
     "location": {
       "value": "eastus"
     },
-    "resourcePrefix": {
-      "value": "atr"
-    },
     "integrationAccountId": {
       "value": "/subscriptions/b3d2bd45-5b6c-47f7-90a5-de1bfe91c9a9/resourceGroups/az-d-rg-b2bIntegration/providers/Microsoft.Logic/integrationAccounts/az-d-ia-b2bIntegration"
-    },
-    "stylesheetStorageConnection": {
-      "value": ""
-    },
-    "partnerConfigApiUrl": {
-      "value": ""
     },
     "existingKeyVaultName": {
       "value": "az-d-kv-b2bInt-eus-01"
@@ -55,6 +43,9 @@
     },
     "storageAccountTier": {
       "value": "Hot"
+    },
+    "stylesheetStorageAccount": {
+      "value": "azdsab2binteus01"
     }
   }
 }

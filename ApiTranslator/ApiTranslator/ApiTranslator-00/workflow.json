@@ -3,11 +3,11 @@
     "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "stylesheetStorageConnection": {
+      "stylesheetStorageAccount": {
         "type": "string",
-        "defaultValue": ""
+        "defaultValue": "azdsab2binteus01"
       },
-      "partnerConfigConnection": {
+      "partnerConfigApiUrl": {
         "type": "string", 
         "defaultValue": ""
       }
@@ -192,7 +192,7 @@
             "type": "Http",
             "inputs": {
               "method": "GET",
-              "uri": "@concat('https://your-config-api.azurewebsites.net/api/partners/', variables('tradingPartnerId'), '/documents/', variables('documentType'))",
+              "uri": "@concat(parameters('partnerConfigApiUrl'), '/api/partners/', variables('tradingPartnerId'), '/documents/', variables('documentType'))",
               "headers": {
                 "Content-Type": "application/json"
               }
@@ -246,7 +246,8 @@
                   "uri": "@body('Parse_Partner_Config')['stylesheetPath']",
                   "headers": {
                     "Content-Type": "application/xml"
-                  }
+                  },
+                  "authentication": "@if(contains(body('Parse_Partner_Config')['stylesheetPath'], parameters('stylesheetStorageAccount')), createObject('type', 'ManagedServiceIdentity', 'audience', 'https://storage.azure.com/'), null)"
                 },
                 "runAfter": {
                   "Parse_Partner_Config": [

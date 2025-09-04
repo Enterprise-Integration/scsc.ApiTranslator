@@ -14,12 +14,6 @@
     "integrationAccountId": {
       "value": "/subscriptions/b3d2bd45-5b6c-47f7-90a5-de1bfe91c9a9/resourceGroups/az-p-rg-b2bIntegration/providers/Microsoft.Logic/integrationAccounts/az-p-ia-b2bIntegration"
     },
-    "stylesheetStorageConnection": {
-      "value": ""
-    },
-    "partnerConfigApiUrl": {
-      "value": ""
-    },
     "existingKeyVaultName": {
       "value": "az-p-kv-b2bInt-eus-01"
     },

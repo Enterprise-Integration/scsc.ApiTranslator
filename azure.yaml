@@ -1,10 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/refs/heads/main/schemas/v1.0/azure.yaml.json
 
 name: ApiTranslator
+metadata:
+  template: azd-init@1.9.5
 infra:
   provider: bicep
-services:
-  az-d-lap-ApiTranslator-eus-03:
-    project: ApiTranslator/ApiTranslator
-    host: function
-    language: dotnet
