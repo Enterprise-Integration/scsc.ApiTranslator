@@ -50,7 +50,7 @@ jobs:
     - name: Deploy Infrastructure (if needed)
       run: |
         # Check if infrastructure exists
-        if ! az functionapp show --name ${{ env.LOGIC_APP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} >/dev/null 2>&1; then
+        if ! az logicapp show --name ${{ env.LOGIC_APP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} >/dev/null 2>&1; then
           echo "Infrastructure not found, would need to deploy Bicep templates"
           echo "Skipping infrastructure deployment as it already exists"
         else
@@ -59,8 +59,8 @@ jobs:
         
     - name: Configure Logic App Settings
       run: |
-        # Ensure required app settings are configured
-        az functionapp config appsettings set \
+        # Ensure required app settings are configured for Logic Apps Standard
+        az logicapp config appsettings set \
           --name ${{ env.LOGIC_APP_NAME }} \
           --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
           --settings \
@@ -76,34 +76,32 @@ jobs:
         # Create deployment package
         zip -r ../../logicapp-deployment.zip . -x "*.git*" "*.vs*" "local.settings.json"
         cd ../..
-        
-        # Deploy using Azure CLI
-        az functionapp deployment source config-zip \
+
+        # Deploy using Logic App-specific Azure CLI commands
+        az logicapp deployment source config-zip \
           --name ${{ env.LOGIC_APP_NAME }} \
           --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-          --src logicapp-deployment.zip
-          
-    - name: Wait for deployment sync
+          --src logicapp-deployment.zip    - name: Wait for deployment sync
       run: |
         echo "Waiting for Logic App to sync workflows..."
         sleep 60
         
     - name: Verify deployment
       run: |
-        # Check Logic App status
-        az functionapp show \
+        # Check Logic App status using logicapp commands
+        az logicapp show \
           --name ${{ env.LOGIC_APP_NAME }} \
           --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
           --query "{name:name, state:state, defaultHostName:defaultHostName}" \
           --output table
           
-        # Try to get workflow URL (may fail if workflow isn't ready yet)
-        echo "Attempting to get workflow trigger URL..."
-        az rest \
-          --method POST \
-          --uri "https://management.azure.com/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ env.AZURE_RESOURCE_GROUP }}/providers/Microsoft.Web/sites/${{ env.LOGIC_APP_NAME }}/hostruntime/admin/workflows/ApiTranslator-00/triggers/When_a_HTTP_request_is_received/listCallbackUrl?api-version=2022-03-01" \
-          --query "value" \
-          --output tsv || echo "Workflow trigger URL not available yet"
+        # List workflows in the Logic App
+        echo "Checking for deployed workflows..."
+        az logicapp workflow list \
+          --name ${{ env.LOGIC_APP_NAME }} \
+          --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+          --query "[].{name:name, state:state}" \
+          --output table || echo "No workflows found yet"
           
     - name: Test deployment health
       run: |
